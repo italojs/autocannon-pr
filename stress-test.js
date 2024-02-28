@@ -4,7 +4,7 @@ const fs = require('fs');
 function runStressTest() {
   const stream = fs.createWriteStream('results.txt');
   const instance = autocannon({
-    url: 'http://localhost:8000', 
+    url: 'https://free-worlds-flow.loca.lt', 
     connections: 100, 
     duration: 60,
   }, console.log);
