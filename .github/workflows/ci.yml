@@ -22,23 +22,19 @@ jobs:
         run: node stress-test.js
         continue-on-error: true 
 
-      - name: Read test results
-        id: test_results
-        run:  |
-          echo "RESULT<<EOF" >> $GITHUB_ENV
-          cat results.txt | base64 >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Comment PR
-        uses: actions/github-script@v6
+      - name: Upload stress test results 
+        uses: actions/upload-artifact@v2
         with:
-          script: |
-            const result = Buffer.from(process.env.RESULT, 'base64').toString('utf-8');
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: result
-            })
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: stress-test-results
+          path: results.txt 
+
+      - name: Comment Autocannon results on PR 
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            ## Autocannon Stress Test Results
+            ```
+            $(cat results.txt)
+            ```
+        if: always()
 
