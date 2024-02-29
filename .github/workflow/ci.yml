@@ -32,4 +32,6 @@ jobs:
             ```
             $(cat results.txt)
             ```
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ github.event.pull_request.number }}
 
