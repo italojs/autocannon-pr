@@ -24,22 +24,12 @@ jobs:
         run: node stress-test.js
         continue-on-error: true 
 
-      - name: Upload stress test results 
-        uses: actions/upload-artifact@v2
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          name: stress-test-results
-          path: results.txt 
-      - name: Comment Autocannon results on PR 
-        run: echo "## Autocannon Stress Test Results\n\`\`\`\n$(cat results.txt)\n\`\`\`"
+          message: |
+            ## Autocannon Stress Test Results
+            ```
+            $(cat results.txt)
+            ```
 
-      # - name: Comment Autocannon results on PR # Comenta os resultados do teste no Pull Request
-      #   uses: thollander/actions-comment-pull-request@v1
-      #   with:
-      #     message: |
-      #       ## Autocannon Stress Test Results
-      #       ```
-      #       $(cat results.txt)
-      #       ```
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     pr_number: ${{ github.event.pull_request.number }}
-      #   if: success() # Pode usar 'always()', 'success()' ou 'failure()' dependendo de quando você quer postar os comentários
