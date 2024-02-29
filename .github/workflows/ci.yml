@@ -4,6 +4,7 @@ on: pull_request
 
 jobs:
   check_comment_and_run_tests:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository 
@@ -17,9 +18,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Run stress tests 
-      #   run: node stress-test.js
-      #   continue-on-error: true 
+      - name: Run stress tests 
+        run: node stress-test.js
+        continue-on-error: true 
 
       - name: Comment PR
         uses: actions/github-script@v7
