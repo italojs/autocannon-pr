@@ -40,5 +40,5 @@ jobs:
               repo: context.repo.repo,
               body: result
             })
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
