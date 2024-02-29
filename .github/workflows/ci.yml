@@ -1,6 +1,6 @@
 name: API Stress Test Workflow
 
-on: push
+on: pull_request
 
 jobs:
   check_comment_and_run_tests:
