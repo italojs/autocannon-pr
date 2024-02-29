@@ -1,8 +1,6 @@
 name: API Stress Test Workflow
 
-on:
-  issue_comment:
-    types: [created]
+on: pull_request
 
 jobs:
   check_comment_and_run_tests:
@@ -32,6 +30,4 @@ jobs:
             ```
             $(cat results.txt)
             ```
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          pr_number: ${{ github.event.pull_request.number }}
 
