@@ -33,6 +33,6 @@ jobs:
         with:
           with:
             filePath: results.txt
-          pr_number: ${{ github.event.number }}
+            pr_number: ${{ github.event.number }}
         if: always()
 
