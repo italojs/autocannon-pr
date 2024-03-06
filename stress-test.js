@@ -9,6 +9,7 @@ function runStressTest() {
   stream.write('```\n');
   stream.on('finish', () => {
     stream.write('\n```\n');
+    process.exit(0);
   });
 
   const instance = autocannon({
