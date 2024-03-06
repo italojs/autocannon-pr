@@ -25,3 +25,5 @@ const server = http.createServer(requestListener);
 server.listen(port, host, () => {
     console.log(`Servidor está rodando em http://${host}:${port}`);
 });
+
+module.exports = server;
