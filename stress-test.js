@@ -2,7 +2,7 @@ const autocannon = require('autocannon');
 const fs = require('fs');
 
 function runStressTest() {
-  const stream = fs.createWriteStream('results.md');
+  const stream = fs.createWriteStream('results.txt');
   stream.write('```\n');
   stream.on('finish', () => {
     stream.write('\n```\n');
