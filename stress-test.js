@@ -3,9 +3,9 @@ const fs = require('fs');
 
 function runStressTest() {
   const stream = fs.createWriteStream('results.md');
-  stream.write('```');
+  stream.write('```\n');
   stream.on('finish', () => {
-    stream.write('```');
+    stream.write('\n```\n');
   });
   const instance = autocannon({
     url: 'http://localhost:8000', 
