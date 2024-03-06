@@ -1,12 +1,16 @@
 name: API Stress Test Workflow
 
 on:
-  issue_comment:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request Number'
+        required: true
+        default: '1'
 
 jobs:
   check_comment_and_run_tests:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, 'trigger stress test')
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository 
@@ -31,13 +35,9 @@ jobs:
           path: results.txt 
 
       - name: Comment Autocannon results on PR 
-        uses: thollander/actions-comment-pull-request@v1
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          message: |
-            ## Autocannon Stress Test Results
-            ```
-            $(cat results.txt)
-            ```
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.issue.number }}
+          filePath: results.txt
+          pr_number: ${{ github.event.number }}
         if: always()
+
