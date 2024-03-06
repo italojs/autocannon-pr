@@ -1,7 +1,11 @@
 const autocannon = require('autocannon');
 const fs = require('fs');
+require('./server.js');
+
 
 function runStressTest() {
+  // start the server
+
   const stream = fs.createWriteStream('results.txt');
   stream.write('```\n');
   stream.on('finish', () => {
@@ -14,8 +18,6 @@ function runStressTest() {
   }, console.log);
 
   autocannon.track(instance, { outputStream: stream });
-  // add ``` to the beginning and end of the file
-
 }
 
 runStressTest();
