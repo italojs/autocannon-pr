@@ -4,13 +4,13 @@ require('./server.js');
 
 
 function runStressTest() {
-  // start the server
 
   const stream = fs.createWriteStream('results.txt');
   stream.write('```\n');
   stream.on('finish', () => {
     stream.write('\n```\n');
   });
+
   const instance = autocannon({
     url: 'http://localhost:8000', 
     connections: 100, 
